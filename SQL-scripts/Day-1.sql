@@ -52,3 +52,9 @@ UPDATE employees SET salary = salary * 1.1 WHERE department_id = 10;
 DELETE e1 FROM employees e1 JOIN 
 employees e2 ON e1.email = e2.email
 WHERE e1.id>e2.id;
+
+
+---- Delete with rowid
+DELETE FROM employees WHERE ROWID NOT IN (
+    SELECT MIN(ROWID) FROM employees GROUP BY email
+)
