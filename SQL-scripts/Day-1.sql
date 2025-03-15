@@ -58,3 +58,14 @@ WHERE e1.id>e2.id;
 DELETE FROM employees WHERE ROWID NOT IN (
     SELECT MIN(ROWID) FROM employees GROUP BY email
 )
+
+
+----- Find Employees who have not been assigned to any departments -----
+
+SELECT * FROM employees 
+WHERE department_id IS NULL;
+
+
+SELECT e.* FROM employees e LEFT JOIN
+departments d ON e.department_id = d.id
+WHERE d.id IS NULL;
